@@ -1,0 +1,22 @@
+Currently (at least) the following is missing:
+ * Definitions for all important entities (in def/), especially:
+   func_*, info_*, path_*, trigger_*, target_*
+ 
+ * GUIs, especially a main menu would be nice.
+
+ * Examples for:
+   - Player model (incl. corresponding definitions etc)
+   - Melee weapon, e.g. stick, (incl. scripts)
+   - Firewarm, e.g. Pistol, Gun, ... (incl. scripts)
+   - one or more enemies (incl. models, scripts etc; could reuse player model)
+
+ * OpenGL Shaders to replace the stuff from Doom3's glprogs/ directory
+   (maybe one of the GLSL implementations + shaders could be improved)
+ 
+ * A script that replaces deprecated materials with their alternatives would be nice.
+
+Everything in this SDK should be under a free license that also allows commercial
+use, e.g. WTFPL (http://sam.zoy.org/wtfpl/), a BSD-like license or a permissive
+CC License (e.g. http://creativecommons.org/licenses/by/3.0/deed.en_US).
+GPL may also be ok, but I'm trying to avoid that to make using the included assets
+easier for projects that use other non-free assets.
