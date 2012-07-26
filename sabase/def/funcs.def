@@ -1,0 +1,182 @@
+func_group {
+	"editor_usage"	"Groups brushes, for convenience. They are converted to normal brushes when compiling the map"
+	"editor_maxs"	"?"
+	"editor_mins"	"?"
+	"editor_color"	"0 0 0"
+}
+
+
+entityDef func_bobbing {
+	"spawnclass"	"idBobber"
+	"editor_usage"	"generic bobbing (moving up and down) entity, bobbing on Z axis by default"
+	"editor_maxs"	"?"
+	"editor_mins"	"?"
+	"editor_color"	"0 0.5 0.8"
+	
+	// FIXME: does func_bobbing really support sounds? c++ code suggests otherwise..
+	"editor_snd snd_close"	"sound on close"
+	"editor_snd snd_open"	"sound on open"
+	"editor_snd snd_opened"	"wtf"
+	
+	"editor_float height"	"height of bob"
+	"editor_float speed"	"duration of a sound (in seconds)"
+	"editor_float phase"	"starting position in bobbing cycle, between 0.0 and 1.0"
+	"editor_float damage"	"amount of damage for entities blocking the bobber"
+	
+	"editor_bool x_axis"	"if set, bob on X-axis"
+	"editor_bool y_axis"	"if set, bob on Y-axis"
+	
+	"damage"	"2"
+	"height"	"32.0"
+	"phase"	"0.0"
+
+	"speed"	"4.0"
+	"x_axis"	"0"
+	"y_axis"	"0"
+}
+
+func_cameraTarget {
+	"spawnclass"	"idMover"
+	"inherit"	"func_mover"
+	"editor_usage"	"controls camera movements"
+	// FIXME: better usage description
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+	"editor_color"	"0 0.5 0.8"
+}
+
+entityDef func_camera_anim {
+	"spawnclass"	"idCameraAnim"
+	"editor_usage"	"animation-controlled camera"
+	"editor_maxs"	"16 16 32"
+	"editor_mins"	"-16 -16 0"
+	"editor_color"	"0 .5 .8"
+			
+	"editor_bool ignore_enemies"	"if not set and camera is active, all active monsters that are not marked as 'cinematic' are removed"
+	"editor_float fov"	"camera's FOV"
+	"editor_model model"	"the model"
+
+	"editor_var joint"				// Verbunden mit angefügter Kamera (?)
+	"editor_int cycle"	"How often the animation is played before targets are triggered (-1 for endlessly)"
+
+	"fov"	"90"
+} 
+
+func_mover {
+	"spawnclass"	"idMover"
+	"editor_usage"	"Movers are objects that can be controlled with scripts"
+	"editor_maxs"	"?"
+	"editor_mins"	"?"
+	"editor_color"	"0 0.5 0.8"
+	
+	"editor_snd snd_accel"	"sound-shader to play on acceleration. Played on channel SND_CHANNEL_BODY2"
+	"editor_snd snd_move"	"sound-shader to play when movement starts. Played on channel SND_CHANNEL_BODY"
+	"editor_snd snd_decel"	"sound-shader to play on deceleration. Played on channel SND_CHANNEL_BODY2"
+
+	"editor_float accel_time"	"time (in sec, as float) until full acceleration"
+	"editor_float decel_time"	"time (in sec, as float) deceleration until full stop"
+	"editor_float damage"	"amount of damage for entities blocking the mover"
+
+	"editor_var guiTarget"	"GUIs associated with this entity"
+	// FIXME: editor_gui?
+	"editor_int health"	"if not 0, amount of damage before targets are triggered"
+	"editor_float move_speed"	"Speed in units/sec. Mutually exclusive with 'move_time'"
+	"editor_float move_time"	"Duration (in sec) of moving sequence. Mutually exclusive with 'move_speed'"
+	"editor_bool nopush"	"If set (not 0) blocking objects are not pushed"
+	"editor_bool solidForTeam"	"if set, the entity is solid for entities it is bound to or that are bound to it"
+	"editor_bool solid"	"if set, the entity is solid for other entities, otherwise it isn't"
+}
+
+entityDef func_mover_amodel {
+	"inherit"	"func_mover"
+	"editor_usage"	"A func_mover with a model (?! seems no different to func_mover at all..)
+	"editor_mins"	"?"
+	"editor_maxs"	"?"
+}
+
+entityDef func_pendulum {
+	"spawnclass"	"idPendulum"
+	"editor_usage"	"If the model doesn't rotate, pendulums just swing back and forth. By specifying an 'angel' a rotation to another direction can be achieved."
+	"editor_usage1"	"The pendulums speed will be calculated based on the strides length and the gravity"
+	// FIXME: where does stride come from?
+	
+	"editor_mins"	"?"
+	"editor_maxs"	"?"	
+	"editor_color"	"0 0.5 0.8"
+	
+
+	// FIXME: does func_pendulum really support sounds? c++ code suggests otherwise..
+	"editor_snd snd_close"	"sound on close"
+	"editor_snd snd_open"	"sound on open"
+	"editor_snd snd_opened"	"wtf"
+	
+	"editor_float damage"	"amount of damage for entities blocking the pendulum"	
+	"editor_float freq"	"if set, frequency of pendulum (otherwise it's calculated by physics engine)"
+	"editor_bool nopush"	"If set blocking objects are not pushed"
+	"editor_float phase"	"starting position in oscillating cycle, between 0.0 and 1.0"
+	"editor_var speed"	"how much the pendulum oscillates, in degrees"
+
+
+	
+	"dmg"	"2"
+	"phase"	"0"
+	"nopush"	"0"
+
+	"speed"	"30"
+}
+
+entityDef func_plat {
+	"spawnclass"	"idPlat"
+	"editor_usage"	"platform like in Quake"
+	"editor_maxs"	"?"
+	"editor_mins"	"?"
+	"editor_color"	"0 0.5 0.8"
+	// FIXME: wtf does this mean?
+	"editor_mover"				"1"
+	
+	// FIXME: are these sounds really supported?
+	"editor_snd snd_open"	"sound on open"
+	"editor_snd snd_opened"	"wtf"
+	"editor_snd snd_close"	"sound on close"
+
+	"editor_bool no_touch"	"If set, the platform isn't activated from a player touching it, but only from triggers"	
+	"editor_var lip"	"overlap above rest position"
+	"editor_var height"	"Maximal height of movement. By default, it's the models height."
+	"editor_var speed"	"platform's speed"
+	"editor_var damage"	"damage dealt to entities blocking the platform"
+
+	"no_touch"	"0"
+	"lip"	"8"
+	"speed"	"200"
+	"dmg"	"2"
+}
+
+entityDef func_rotating {
+	"spawnclass"	"idRotater"
+	"editor_usage"	"Generic rotating entity, rotates around Z-axis by default. Targeting it toggles rotation (starts/stops it)"
+	"editor_maxs"	"?"
+	"editor_mins"	"?"
+	"editor_color"	"0 0.5 0.8"
+
+	"editor_float damage"	"amount of damage for entities blocking the rotater"
+	"editor_float speed"	"rotation speed"	
+	"editor_bool start_on"	"if set, rotates after being spawned, else it must be targeted first"
+	"editor_bool x_axis"	"if set rotates around X-axis"
+	"editor_bool y_axis"	"if set rotates around Y-axis"
+
+	"damage"	"2"
+	"speed"	"100"
+	"start_on"	"1"
+	"x_axis"	"0"
+	"y_axis"	"0"
+} 
+
+entityDef func_splinemover {
+	"spawnclass"	"idSplinePath"
+	"editor_usage"	"saves a 'spline' path"
+	// FIXME: wtf? for what? how?
+	"editor_maxs"	"?"
+	"editor_mins"	"?"
+	"editor_color"	"0 0.5 0.8"
+}
+
