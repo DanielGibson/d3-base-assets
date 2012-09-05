@@ -188,9 +188,35 @@ entityDef func_emitter {
 	"editor_var cycleTrigger"	"if set, particle won't be hidden when triggered, but it's sequence is restarted"
 	"editor_var start_off"	"if set, particle is hidden on spawn"
 
-	"solid"						"0"
-	"noclipmodel"				"1"
+	"solid" 	"0"
+	"noclipmodel"	"1"
 
+}
+
+entityDef func_forcefield {
+	"spawnclass"	"idForceField"
+	"editor_usage"	"a force field."
+	"editor_maxs"	"?"
+	"editor_mins"	"?"
+	"editor_color"	"1 0.5 0.3"
+	
+	"editor_bool applyForce"	"if set, apply a force"
+	"editor_bool applyImpulse"	"if set, apply impulse"
+	"editor_bool applyVelocity" "if set, apply velocity"
+	"editor_bool monsterOnly"	"forcefield only exists for monsters"
+	"editor_bool playerOnly"	"forcefield only exists for players"
+	"editor_bool start_on"	"usually a forcefield is turned off after spawn. if set, it's turned on after spawn"
+	
+	"editor_float explosion"	"intensity of explosive force. if set, the field has a repellent force from its origin"
+	"editor_float implosion"	"intensity of implosive force. if set, the field has a force pulling to its origin"
+	"editor_float randomTorque"	"intensity of random torque that is added to entities touching the forcefield"
+	// TODO: on first look it seems like multiple targets are allowed?
+	"editor_var  target"	"Target entity. If set, the forcefield is distributed (FIXME: ??) evenly in the direction of the target, the intensity of the force is equal to the distance to the target"
+	"editor_var uniform"	"3D force vector (x, y, z). If set, the force field is uniform, the force equals the vectors length"
+	"editor_float  wait"	"If set, the forcefield returns to its former state after this many seconds"
+	
+	"randomTorque"	"0"
+	"start_on"	"0"
 }
 
 entityDef func_mover {
@@ -390,7 +416,6 @@ entityDef func_static {
 	"editor_bool gui_noninteractive"	"attached GUIs will be marked as noninteractive"
 	"editor_bool runGui"	"if set, does something expensive, so use very rarely. seems to update the guis each frame or something like that"
 	// FIXME: what does runGUI really do?
-
 	
 	"noclipmodel"	"0"
 	"solid"	"1"
