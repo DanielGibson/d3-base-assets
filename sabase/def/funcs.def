@@ -65,6 +65,22 @@ entityDef func_cameraTarget {
 	"editor_color"	"0 0.5 0.8"
 }
 
+entityDef func_cameraview {
+	"spawnclass"	"idCameraView"
+	"editor_usage"	"Simple camera view. " // TODO: wendet eine Kreismatrix, einen Angel und einen Target am 'target_null' an. (Hä?)
+
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+	"editor_color"	"0 0.5 0.8"
+	"editor_rotatable"	"1"
+	"editor_showangle"	"1"
+
+	"editor_bool ignore_enemies"	"if set, all monsters with an enemy that are not set to 'cinematic' will be ignored (not shown)"
+	"editor_var cameraTarget"	"target entity which's view will be rendered. if not set this entity's position will be used"
+	"editor_float fov"	"field of view, by default 90°"
+	"editor_bool trigger"	"if set, triggering this func_cameraview sets the view to the cameratarget, triggering it again resets the view to normal"
+}
+
 entityDef func_camera_anim {
 	"spawnclass"	"idCameraAnim"
 	"editor_usage"	"animation-controlled camera"
@@ -362,6 +378,52 @@ entityDef func_rotating {
 	"y_axis"	"0"
 }
 
+entityDef func_securitycamera {
+	"spawnclass"	"idSecurityCamera"
+
+	"editor_usage"		"Security Camera"
+	"editor_usage1"		"The camera should be adjustet to the starting position."
+	"editor_usage2"		"From there it will rotate by sweepAngel degrees and back"
+	"editor_usage3"		"see doom3's duffy/examples/securitycam.map for an example"
+
+	"editor_maxs"	"4 4 4"
+	"editor_mins"	"-4 -4 -4"
+	"editor_color"	"1 0.5 0.3"
+	"editor_rotatable"	"1"
+	"editor_showangle"	"1"
+
+	"editor_bool flipAxis"	"if set, the model axis are flipped"
+	"editor_int health"		"cameras health"
+	"editor_int modelAxis"	"0, 1, 2 depending on the direction the source model is built in"
+	"editor_float scanFov"	"field of view"
+	"editor_float scanDist"	"camera's view distance"
+	"editor_float sweepAngle"	"how far the camera sweeps"
+	"editor_float sweepSpeed"	"speed of a sweep"
+	"editor_float sweepWait"	"time to wait (in sec) after a sweep, before sweeping back"
+	"editor_float sightResume"	"time to wait (in sec) before resuming to scan after seing the player without activating"
+	"editor_float sightTime"	"amount of seconds until player is recognized"
+	"editor_float wait"		"time to wait (in sec) until alarm is revoked"
+
+	"editor_snd snd_activate"	"sound when camera enters alarm mode"
+	"editor_snd snd_moving"		"sound while moving"
+	"editor_snd snd_sight"	"sound when it sights the player"
+	"editor_snd snd_stop"	"when camera stops before sweeping back"
+
+	"snd_activate"	"security_camera_activate"
+	"snd_moving"	"security_camera_moving"
+	"snd_sight"	"security_camera_sight"
+	"snd_stop"	"security_camera_end"
+	"health"	"100"
+	"scanDist"	"200"
+	"scanFov"	"90"
+	"sightResume"	"1.5"
+	"sightTime"	"5"
+	"sweepAngle"	"90"
+	"sweepSpeed"	"5"
+	"sweepWait"	"0.5"
+	"wait"	"20"
+}
+
 entityDef func_shaking {
 	"spawnclass"	"idShaking"
 	"editor_usage"	"Shaking object. Starts shaking on spawn (unless start_off is set)"
@@ -463,9 +525,9 @@ entityDef func_teleporter {
 	"editor_usage"	"teleports the player to the location of func_teleporter and given angle"
 	"editor_usage1" "Note: needs to be triggered, the player will then be beamed from trigger to the func_teleporter"
 
-	"editor_maxs"				"16 16 16"
-	"editor_mins"				"-16 -16 -16"
-	"editor_color"				"1 0.5 0.3"
+	"editor_maxs"	"16 16 16"
+	"editor_mins"	"-16 -16 -16"
+	"editor_color"	"1 0.5 0.3"
 
 	"editor_var angle"	"direction the player looks at after respawn"
 	"editor_var wipe"	"'wipe' sound while teleportation"
