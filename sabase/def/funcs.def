@@ -26,6 +26,35 @@ entityDef func_activator {
 	"stay_on"	"0"
 }
 
+entityDef func_animate {
+	"spawnclass"	"idAnimated"
+	"editor_usage"	"object that changes animation when triggered"
+
+	"editor_maxs"	"16 16 32"
+	"editor_mins"	"-16 -16 0"
+	"editor_color"	"1 0.5 0.3"
+
+	"editor_var start_anim"	"animation that is played after spawn. repeated until this entity is triggered"
+	"editor_int num_anims"	"number of animations to play. when the entity is triggered, the next animation is played. use 'anim1', 'anim2', ... to define multiple animations. after last animation the targets are triggered"
+	"editor_var anim"	"name of animation to play. use 'anim1', 'anim2', .. if 'num_anims' > 0"
+	"editor_bool auto_advance"	"if 'num_anims' is set, the next animation is played without further triggering"
+
+	"editor_int blend_in"	"how long (in ms) to blend from 'start_anim' to triggered 'anim'"
+	"editor_int cycle"	"how often an animation is played after being triggered. -1 means forever"
+	"editor_bool hide"	"if set, entity is invisible until triggered. doesn't work if 'start_anim' is set."
+	"editor_var loop_last_anim"	"if 'num_anims' is set, the last animation is repeated. next trigger will make it invisible"
+	"editor_bool remove"	"if set, entity is removed after 'anim'"
+	"editor_var sound_bone"		"bone to emit sounds"
+	"editor_var target"		"entities with this name will be triggered after 'anim'. you can provide multiple targets with 'target1', 'target2', ..."
+	"editor_float wait"	"how long (in sec) to wait until the animation is triggered automatically. -1 waits until triggered"
+
+	"blend_in"	"0"
+	"cycle"		"1"
+	"pose_frame"	"1"
+	"sound_bone"	"origin"
+	"wait"	"-1"
+}
+
 entityDef func_bobbing {
 	"spawnclass"	"idBobber"
 	"editor_usage"	"generic bobbing (moving up and down) entity, bobbing on Z axis by default"
@@ -106,6 +135,20 @@ entityDef func_clipmodel {
 	"editor_color"	"0 0.5 0.8"
 
 }
+
+entityDef func_damage {
+	"spawnclass"	"idTarget_Damage"
+	"editor_usage"	"inflicts damage to targeted entities, when triggered"
+
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+	"editor_color"	"0 0.5 0.8"
+
+	"editor_var def_damage"		"damage def (see damages.def) to be used"
+	"editor_var target"	"Entity to damage when this entity is triggered. Can damage multiple entities with target1, target2, .."
+
+	"def_damage"	"damage_generic"
+} 
 
 entityDef func_damagable {
 	"spawnclass"	"idDamagable"
@@ -271,6 +314,17 @@ entityDef func_fx {
 	"editor_bool start"	"start effect on spawn"
 }
 
+entityDef func_itemremove {
+	"spawnclass"	"idItemRemover"
+	"editor_usage"	"deletes an item from the players inventory"
+
+	"editor_maxs"	"4 4 4"
+	"editor_mins"	"-4 -4 -4"
+	"editor_color"	"0 0.5 0.8"
+
+	"editor_var remove"		"name of item that should be removed, e.g. 'objective' or 'key_red'"
+} 
+
 entityDef func_mover {
 	"spawnclass"	"idMover"
 	"editor_usage"	"Movers are objects that can be controlled with scripts"
@@ -356,6 +410,17 @@ entityDef func_plat {
 	"lip"	"8"
 	"speed"	"200"
 	"damage"	"2"
+}
+
+entityDef func_remove {
+	"spawnclass"	"idTarget_Remove"
+	"editor_usage"	"removes all targeted entities, when triggered"
+	
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+	"editor_color"	"0 0.5 0.8"
+	
+	"editor_var target"		"entity with this name will be removed. use 'target1', 'target2', ... to delete multiple entities"
 }
 
 entityDef func_rotating {
@@ -475,7 +540,7 @@ entityDef func_spring {
 	"editor_mins"	"?"
 	"editor_color"	"1 0.5 0.3"
 
-	// descriptions mostly from "S@TaNiC" at http://www.doom3world.org/phpbb2/viewtopic.php?p=134673&sid=e8ef5da707a50104f5d2ff2e90b04997#p134673
+	// descriptions mostly from "S@TaNiC" at http://www.doom3world.org/phpbb2/viewtopic.php?p=134673#p134673
 	"editor_var ent1"	"name of first entity to be connected, if not set the 'world' entity is used (I think; not sure about the last part)"
 	"editor_var ent2"	"name of second entity to be connected, if not set the 'world' entity is used (I think; not sure about the last part)"
 	"editor_float restlength"	"Length of the spring when at rest (not stretched/compressed)"
@@ -532,4 +597,15 @@ entityDef func_teleporter {
 	"editor_var angle"	"direction the player looks at after respawn"
 	"editor_var wipe"	"'wipe' sound while teleportation"
 
+}
+
+entityDef func_waitforbutton {
+	"spawnclass"	"idTarget_WaitForButton"
+	"editor_usage"	"when activated, waits until player presses button, triggers target afterwards. switches on/off when triggered"
+
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+	"editor_color"	"0 0.5 0.8"
+
+	"editor_var target"	"entity to trigger. use 'target1', 'target2', ... to trigger multiple entities"
 }
