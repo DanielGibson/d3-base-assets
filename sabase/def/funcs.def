@@ -233,6 +233,38 @@ entityDef func_door {
 	"wait"	"3"
 }
 
+entityDef func_elevator {
+	"spawnclass"	"idElevator"
+	"editor_usage"	"An elevator that moves to configured floors and opens doors based on floors."
+	"editor_usage1"	"Can be controoled with the default elevator GUI."
+	"editor_usage2"	"counting floors starts at 1. Use floorPos_2, floorDoor_2 for second floor etc"
+
+	"editor_maxs"	"?"
+	"editor_mins"	"?"
+	"editor_color"	"0 0.5 0.8"
+
+	// TODO: triggerFloor and trigger?
+
+	"editor_float accel_time"	"acceleration time (seconds)"
+	"editor_float decel_time"	"deceleration time (seconds)"
+	"editor_int floor"		"floor number the elevator is at after spawn (counting starts with 1)"
+	"editor_var floorPos_1" 	"origin (position) of 1. floor, e.g. '0 0 0'. Use floorPos_2, floorPos_3, ... for further floors"
+	"editor_var floorDoor_1"	"name of outer doors in first floor. Use floorDoor_2, floorDoor_3, ... for further floors"
+	"editor_var innerdoor"	"name of inner doors, will move with the elevator"
+	"editor_float move_speed"	"Elevator's speed in units/second. Use EITHER this OR move_time"
+	"editor_float move_time"	"Time (in seconds) to move from one floor to the next. Use EITHER this OR move_speed"
+	"editor_int pauseOnFloor"	"in this floor the elevator stops and pauses before opening the doors"
+	"editor_float pauseTime"	"duration of stop (in seconds) if pauseOnFloor is set"
+	"editor_snd snd_accel"	"sound when elevator movement starts"
+	"editor_snd snd_decel"	"sound when elevator movement stops"
+	"editor_snd snd_move"	"sound while moving"
+	"editor_var statusgui"	"GUI entity to show floor infos. Its state-string 'floor' will be set to the current floor (e.g. '1') or '' while moving. Use statusgui2, statusgui3, .. to trigger multiple guis at once"
+
+	"snd_accel"	"sound/ed/elevator/elev_start.wav"
+	"snd_decel"	"sound/ed/elevator/elev_end.wav"
+	"snd_move"	"elevator_moving_loop"
+}
+
 entityDef func_emitter {
 	"spawnclass"	"idFuncEmitter"
 	"inherit"	"func_static"
