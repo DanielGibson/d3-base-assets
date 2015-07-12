@@ -33,6 +33,15 @@ textures/common/aassolid
 	noShadows
 }
 
+// to be used with func_aas_portal
+textures/editor/aasportal
+{
+	qer_editorimage	textures/common/aasportal.tga
+	qer_nocarve // disallow CSG operations on brushes with this texture
+	
+	noShadows
+}
+
 // to be used by func_radiochatter
 textures/editor/radiochatter
 {
@@ -45,7 +54,7 @@ textures/editor/radiochatter
 // this defines a portal, seperating areas of the map.
 // when within the players POV it's "open", else "closed".
 // if it's in a func_door it's closed when the door is closed.
-// see http://www.modwiki.net/wiki/Visportal
+// see https://modwiki.xnet.fi/Visportal
 textures/common/visportal
 {
 	qer_editorimage	textures/common/visportal.tga
@@ -60,7 +69,7 @@ textures/common/visportal
 // use this to seal off places that cannot be possibly seen by the player.
 // e.g. behind patches (you can't see through them, but they don't seal off your
 // map to the void/other areas, thus possibly causing leaks).
-// http://www.modwiki.net/wiki/Caulk
+// see https://modwiki.xnet.fi/Caulk
 textures/common/caulk
 {
 	qer_editorimage	textures/common/caulk.tga

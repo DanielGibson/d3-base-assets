@@ -1,5 +1,5 @@
 // recreated (in a clean-room way) definitions of the func_* entities of Doom3 and RoE
-// (C) 2012 Daniel Gibson and Yamagi Burmeister, licensed under WTFPL v2
+// (C) 2012, 2015 Daniel Gibson and Yamagi Burmeister, licensed under WTFPL v2
 
 entityDef func_group {
 	"editor_usage"	"Groups brushes, for convenience. They are converted to normal brushes when compiling the map"
@@ -8,6 +8,29 @@ entityDef func_group {
 	"editor_color"	"0 0 0"
 }
 
+entityDef func_aas_portal {
+	"spawnclass" 		"idFuncAASPortal"
+	// TODO: I hope "makes invisible" is right and a better description than just "blocks"
+	"editor_usage" 		"makes areas invisible for monsters. can be controlled via trigger"
+	"editor_maxs"		"?"
+	"editor_mins"		"?"
+	"editor_color"		"0.0 1.0 0.0"
+	"editor_material"	"textures/editor/aasportal"
+	
+	"editor_bool start_on" "if set (to 1), the it's closed on map start"
+}
+
+entityDef func_aas_obstacle {
+	"spawnclass" 		"idFuncAASObstacle"
+	"editor_usage" 		"blocks areas for monsters (as a dynamic obstacle). can be switched on/off via trigger"
+	"editor_maxs"		"?"
+	"editor_mins"		"?"
+	"editor_color"		"0.0 1.0 0.0"
+	// FIXME: this material doesn't exist (and didn't in doom3)
+	// "editor_material"	"textures/common/aasobstacle"
+	
+	"editor_bool start_on" "if set (to 1), the it's blocked on map start"
+}
 
 entityDef func_activator {
 	"spawnclass"	"idActivator"
@@ -55,6 +78,19 @@ entityDef func_animate {
 	"wait"	"-1"
 }
 
+entityDef func_beam {
+	"spawnclass"	"idBeam"
+	"editor_usage"	"Creates a beam from its origin to the origin of a targeted func_beam. Switches on/off when triggered." \
+					" Can only target one func_beam. Can only be targeted by one func_beam"
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+	"editor_color"	"1 0.5 0.3"
+	
+	"editor_var skin"		"material of beam's texture"
+	"editor_bool start_off"	"if 1/true, the beam is switched off after spawn"
+	"editor_float width"	"the beam's width"
+}
+
 entityDef func_bobbing {
 	"spawnclass"	"idBobber"
 	"editor_usage"	"generic bobbing (moving up and down) entity, bobbing on Z axis by default"
@@ -96,7 +132,7 @@ entityDef func_cameraTarget {
 
 entityDef func_cameraview {
 	"spawnclass"	"idCameraView"
-	"editor_usage"	"Simple camera view. " // TODO: wendet eine Kreismatrix, einen Angel und einen Target am 'target_null' an. (Hä?)
+	"editor_usage"	"Simple camera view. " // TODO: wendet eine Kreismatrix, einen Angle und einen Target am 'target_null' an. (Hä?)
 
 	"editor_maxs"	"8 8 8"
 	"editor_mins"	"-8 -8 -8"
@@ -161,7 +197,7 @@ entityDef func_damagable {
 	"editor_mins"	"?"
 	"editor_color"	"0 0.5 0.8"
 
-	"editor_int numstates"	"Mumber of shader states. 'shaderparam 7' will be set to a value between 1 and 'numstates'."
+	"editor_int numstates"	"Number of shader states. 'shaderparam 7' will be set to a value between 1 and 'numstates'."
 	"editor_bool cycle" 	"If set, cycle through shaders when damaged. When 'numstates' is reached it's reset to 0."
 	"editor_model broken"	"If set, switch to this model when destroyed"
 
@@ -231,6 +267,22 @@ entityDef func_door {
 	"start_open"	"0"
 	"triggersize"	"60"
 	"wait"	"3"
+}
+
+entityDef func_earthquake {
+	"spawnclass"	"idEarthQuake"
+	"editor_usage"	"Used to create an earth quake. The soundshader *must* have the 'shakes' attribute set for realistik shakes based on the sound!"
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+	"editor_color"	"0 1 0"
+	"editor_material" "textures/common/speaker"
+	
+	"editor_bool playerOriented"	"if 1/true, the sound is played at player's origin,  else at entity's origin"
+	"editor_float random"			"variance for random waits between shakes (they'll be wait + random*<random val between -1 and 1>)"
+	"editor_float shakeTime"		"how long to shake before becoming inactive (or something like that??)" // TODO: improve
+	"editor_bool triggered"			"only starts quaking after being triggered"
+	"editor_float wait"				"seconds between activations. -1 means only one activation"
+	"editor_snd snd_quake"	"sound shader or wave file"
 }
 
 entityDef func_elevator {
@@ -329,6 +381,35 @@ entityDef func_forcefield {
 	"start_on"	"0"
 }
 
+entityDef func_fracture {
+	"spawnclass"	"idBrittleFracture"
+	"editor_usage"	"boundary representation (of of render model) brittle fracture"
+	"editor_maxs"	"?"
+	"editor_mins"	"?"
+	"editor_color"	"1 0.5 0.8"
+	
+	"editor_var angularVelocityScale" "angular velocity scale"
+	"editor_float decalSize"		"projected decal's size"
+	"editor_bool disableFracture"	"(defaults to 0/false, set to false if entity is activated)"
+	"editor_var fx"					"special effect when surface breaks"
+	"editor_int health"				"surface breaks when health reaches 0"
+	"editor_float maxShardArea"		"max area of each shard"
+	"editor_float maxShatterRadius"	"max distance between projectile impact and cracks (??)" // TODO: better translation?
+	"editor_float minShatterRadius"	"max distance between projectile impact and cracks (??)"
+	"editor_var mtr_decal"			"material for decals"
+	"editor_float linearVelocityScale" "linear velocity scale"
+	
+	"editor_snd snd_bullethole"		"sound played for bullet holes"
+	"editor_snd snd_shatter"		"sound played when it breaks"
+	
+	// TODO: according to code, this has some more properties, mostly rigid-body related
+	// "shardMass", "density", "friction", "bouncyness"
+	
+	"mtr_decal"			"textures/decals/shot_glass"
+	"snd_bullethole"	"glass_bullethole"
+	"snd_shatter"		"glass_shatter"
+}
+
 entityDef func_fx {
 	"spawnclass"	"idEntityFx"
 	"editor_usage"	"spawns a special effect (.fx) when triggered"
@@ -355,7 +436,43 @@ entityDef func_itemremove {
 	"editor_color"	"0 0.5 0.8"
 
 	"editor_var remove"		"name of item that should be removed, e.g. 'objective' or 'key_red'"
-} 
+}
+
+entityDef func_liquid {
+	// TODO: this whole thing doesn't make much sense to me and the idLiquid class
+	//       doesn't even contain real code
+	
+	"spawnclass" "idLiquid"
+	"editor_usage" "not properly supported, see https://modwiki.xnet.fi/How_to_add_water"
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+	"editor_color"	"0 0.5 0.8"
+	
+	"maxs"	"144 144 64"
+	"mins"	"0 0 -64"
+}
+
+entityDef func_mountedobject {
+	"spawnclass" "idFuncMountedWeapon"
+	"editor_usage" "an entity that can be mounted by the player which can shoot (from d3xp aka RoE). can call a script function"
+	"editor_maxs"	"?"
+	"editor_mins"	"?"
+	"editor_color"	"0 0.5 0.8"
+	
+	"editor_var bindJoint"	"model bone to use as view position"
+	"editor_var def_projectile" "the kind of projectile to shoot"
+	"editor_float firerate"	"the rate of fire, I guess..."
+	"editor_int harc"		"restrict horizontal view by +/- this angle"
+	"editor_int varc"		"restrict vertical view by +/- this angle"
+	"editor_snd snd_fire"	"the sound to play when firing a projectile"
+	
+	
+	"def_projectile"	"projectile_rocket" // FIXME: we probably don't have this defined
+	"firerate"			"3"
+	"harc"				"45"
+	"snd_fire"			"player_rocketlauncher_fire"
+	"varc"				"30"
+}
 
 entityDef func_mover {
 	"spawnclass"	"idMover"
@@ -391,7 +508,7 @@ entityDef func_mover_amodel {
 
 entityDef func_pendulum {
 	"spawnclass"	"idPendulum"
-	"editor_usage"	"If the model doesn't rotate, pendulums just swing back and forth. By specifying an 'angel' a rotation to another direction can be achieved."
+	"editor_usage"	"If the model doesn't rotate, pendulums just swing back and forth. By specifying an 'angle' a rotation to another direction can be achieved."
 	"editor_usage1"	"The pendulums speed will be calculated based on the strides length and the gravity"
 	// FIXME: where does stride come from?
 
@@ -406,10 +523,10 @@ entityDef func_pendulum {
 	"editor_snd snd_opened"	"wtf"
 
 	"editor_float damage"	"amount of damage for entities blocking the pendulum"	
-	"editor_float freq"	"if set, frequency of pendulum (otherwise it's calculated by physics engine)"
+	"editor_float freq"		"if set, frequency of pendulum (otherwise it's calculated by physics engine)"
 	"editor_bool nopush"	"If set blocking objects are not pushed"
 	"editor_float phase"	"starting position in oscillating cycle, between 0.0 and 1.0"
-	"editor_var speed"	"how much the pendulum oscillates, in degrees"
+	"editor_float speed"	"how much the pendulum oscillates, in degrees"
 
 
 	"damage"	"2"
@@ -417,6 +534,31 @@ entityDef func_pendulum {
 	"nopush"	"0"
 
 	"speed"	"30"
+}
+
+entityDef func_phantom_objects {
+	"spawnclass" "idPhantomObjects"
+	"editor_usage" "when triggered, throws targeted moveable(!) entities towards player. trigger to enable/disable"
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+	"editor_color"	"0 0.5 0.8"
+	
+	"editor_float end_time"	"how long (in secs) to throw objects (if 0, each is thrown once)"
+	"editor_float max_wait"	"max. time before an object is thrown again"
+	"editor_float min_wait"	"min. time before an object is thrown again"
+	"editor_float speed"	"speed of the thrown objects"
+	"editor_float shake_time" "how long to shake objects before they're thrown"
+	"editor_float time"		"how long it takes until all objects are thrown at least once (??)"
+	"editor_var shake_ang"	"3D vector somehow used for angular velocity of flying objects"
+	
+	
+	"end_time"		"0"
+	"max_wait"		"3"
+	"min_wait"		"1"
+	"speed"			"1200"
+	"shake_ang"		"65 65 65"
+	"shake_time"	"1"
+	"time"			"5"
 }
 
 entityDef func_plat {
@@ -433,15 +575,40 @@ entityDef func_plat {
 	"editor_snd snd_close"	"sound on close"
 
 	"editor_bool no_touch"	"If set, the platform isn't activated from a player touching it, but only from triggers"	
-	"editor_var lip"	"overlap above rest position"
-	"editor_var height"	"Maximal height of movement. By default, it's the models height."
-	"editor_var speed"	"platform's speed"
-	"editor_var damage"	"damage dealt to entities blocking the platform"
+	"editor_float lip"	"overlap above rest position"
+	"editor_float height"	"Maximal height of movement. By default, it's the models height."
+	"editor_float speed"	"platform's speed"
+	"editor_float damage"	"damage dealt to entities blocking the platform"
+
+	// TODO: accel_time, decel_time ?
 
 	"no_touch"	"0"
 	"lip"	"8"
 	"speed"	"200"
 	"damage"	"2"
+}
+
+entityDef func_portal {
+	"spawnclass" 		"idFuncPortal"
+	"editor_usage" 		"a portal that can be controlled (opened/closed) via trigger"
+	"editor_maxs"		"16 16 16"
+	"editor_mins"		"-16 -16 -16"
+	"editor_color"		"0.0 1.0 0.0"
+	"editor_material"	"textures/common/visportal"
+	
+	"editor_bool start_on" "if set (to 1), the portal is closed on map start"
+}
+
+entityDef func_radiochatter {
+	"spawnclass" "idFuncRadioChatter"
+	"editor_usage" "plays snd_radiochatter sound though radio channel when triggered"
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+	"editor_color"	"1.0 1.0 0.0"
+	"editor_material" "textures/common/radiochatter"
+	
+	"editor_snd snd_radiochatter" "sound to play through radio when triggered"
+	"editor_float time" "only used if snd_radiochatter is not set/invalid: how long to show the radio icon in the HUD when entity is triggered"
 }
 
 entityDef func_remove {
@@ -453,6 +620,24 @@ entityDef func_remove {
 	"editor_color"	"0 0.5 0.8"
 	
 	"editor_var target"		"entity with this name will be removed. use 'target1', 'target2', ... to delete multiple entities"
+}
+
+entityDef func_riser {
+	"spawnclass" "idRiser"
+	"editor_usage" "rises up or falls down when triggered"
+	"editor_maxs"	"?"
+	"editor_mins"	"?"
+	"editor_color"	"0 0.5 0.8"
+	
+	"editor_float height"	"how far to rise (negative values to fall)"
+	"editor_bool hide"		"hidden after level start"
+	"editor_bool nopush"	"if set (to 1), this doesn't push other entities"
+	"editor_bool solid"		"if not set (or value 0), the object is non-solid"
+	"editor_float time"		"time (in seconds) to finish movement"	
+	
+	"height"	"32"
+	"time"		"5"
+	"nopush"	"0"
 }
 
 entityDef func_rotating {
@@ -480,7 +665,7 @@ entityDef func_securitycamera {
 
 	"editor_usage"		"Security Camera"
 	"editor_usage1"		"The camera should be adjustet to the starting position."
-	"editor_usage2"		"From there it will rotate by sweepAngel degrees and back"
+	"editor_usage2"		"From there it will rotate by sweepAngle degrees and back"
 	"editor_usage3"		"see doom3's duffy/examples/securitycam.map for an example"
 
 	"editor_maxs"	"4 4 4"
@@ -536,6 +721,28 @@ entityDef func_shaking {
 	"shake"	"0.5 0.5 0.5"
 }
 
+entityDef func_shockwave {
+	"spawnclass" "idShockwave"
+	"editor_usage"	"a spheric shockwave that kicks every physics object it touches"
+	"editor_color"	"0 0.5 0.8"
+	"editor_maxs"	"8 8 16"
+	"editor_mins"	"-8 -8 0"
+	
+	"editor_var def_player_damage" "def name of the type of damage dealt to the player, if he is hit by the shockwave"
+	"editor_int duration"		"how long it takes the shockwave to expand to its full size, in milliseconds (default: 750)"
+	"editor_float endsize"		"size of the fully expanded shockwave, defaults to 512"
+	"editor_float height"		"height of the expanding shockwave, specialö case 0 for real sphere (that's the default)"
+	"editor_float magnitude"	"how much objects are kicked, defaults to 10000"
+	"editor_var player_damage_size"	"size of the sphere around the player to intersect with shockwave sphere, defaults to 20"
+	"editor_var start_on"		"if set (to 1), the shockwave expands directly after being spawned (else aftere being triggered)"
+	"editor_var startsize"		"size of the shockwave at start, defaults to 8"
+	
+	"duration"	"1000"
+	"endsize"	"512"
+	"magnitude"	"10000"
+	"startsize"	"8"
+}  
+
 entityDef func_smoke {
 	"spawnclass"	"idFuncSmoke"
 	"editor_usage"	"Creates smoke with a 'smoke system'. Can be triggered to switch on/off"
@@ -554,9 +761,29 @@ entityDef func_smoke {
 	"solid"	"0"
 }
 
+entityDef func_splat {
+	"spawnclass"	"idFuncSplat"
+	"inherit"		"func_emitter"
+	
+	"editor_usage" "ejects ('spurts') a decal into direction of rotation angle, until it hits ('splats') a surface"
+	"editor_maxs"	"6 6 6"
+	"editor_mins"	"-6 -6 -6"
+	"editor_color"	"0.0 0.0 1.0"
+	"editor_rotatable" "1"
+	
+	"editor_var mtr_splat"		"decal to splat, set multiples (mtr_splat2, mtr_splt3, ..) for random effects"
+	"editor_snd snd_splat"		"sound to be played at splat (optional)"
+	"editor_snd snd_spurt"		"sound to be played at spurt (optional)"
+	"editor_float splatAngle"	"rotate decal by given angle (in radians; 0 means random angle)"
+	"editor_int splatCount"		"how many decals should be splatted?"
+	"editor_float splatDelay"	"delay (in secs) between spurt sound and splat"
+	"editor_float splatDistance" "how far the decal is projected (defaults to 128)"
+	"editor_float splatSize"	"size of the decal (defaults to 128)" // FIXME: orig func.def says 24, but it's really 128 in idFuncSplat
+}
+
 entityDef func_splinemover {
 	"spawnclass"	"idSplinePath"
-	"editor_usage"	"saves a 'spline' path"
+	"editor_usage"	"saves a 'spline' path (??)"
 	// FIXME: wtf? for what? how?
 	"editor_maxs"	"?"
 	"editor_mins"	"?"
