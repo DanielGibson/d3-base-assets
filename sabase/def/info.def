@@ -1,0 +1,94 @@
+// recreated definitions of entities of Doom3, originally in info.def and misc.def
+// (C) 2015 Daniel Gibson and Yamagi Burmeister, licensed under WTFPL v2
+
+// from info.def:
+
+entityDef info_player_start {
+	"spawnclass"       "idPlayerStart"
+	
+	"editor_usage"	"TODO!"
+	
+	"editor_color"     "1 0 0"
+	"editor_maxs"      "16 16 64"
+	"editor_mins"      "-16 -16 0"
+	"editor_showangle" "1"
+
+
+	// TODO: still incomplete
+}
+
+entityDef info_player_deathmatch {
+	"spawnclass"       "idPlayerStart"
+	
+	"editor_usage"	"TODO!"
+	
+	"editor_color"     "1 0 0"
+	"editor_maxs"      "16 16 64"
+	"editor_mins"      "-16 -16 0"
+
+	"editor_showangle" "1"
+
+	// TODO: still incomplete
+}
+
+entityDef info_player_teleport {
+	"spawnclass"	"idPlayerStart"
+
+	"editor_usage"	"TODO: Meaningful description, this is a stub!"
+
+	"editor_color"	"0.0 0.5 0.8"
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+
+	// TODO: This is just a stub - add proper entity definition and explanation!
+}
+
+// from misc.def:
+
+entityDef info_location {
+	"spawnclass"	"idLocationEntity"
+
+	"editor_usage"	"TODO: Meaningful description, this is a stub!"
+
+	"editor_color"	"0.0 0.5 0.8"
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+
+	// TODO: This is just a stub - add proper entity definition and explanation!
+}
+
+entityDef info_locationSeparator {
+	"spawnclass"	"idLocationSeparatorEntity"
+
+	"editor_usage"	"TODO: Meaningful description, this is a stub!"
+
+	"editor_color"	"0.0 0.5 0.8"
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+
+	// TODO: This is just a stub - add proper entity definition and explanation!
+}
+
+entityDef info_vacuum {
+	"spawnclass"	"idVacuumEntity"
+
+	"editor_usage"	"TODO: Meaningful description, this is a stub!"
+
+	"editor_color"	"0.0 0.5 0.8"
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+
+	// TODO: This is just a stub - add proper entity definition and explanation!
+}
+
+entityDef info_vacuumSeparator {
+	"spawnclass"	"idVacuumSeparatorEntity"
+
+	"editor_usage"	"TODO: Meaningful description, this is a stub!"
+
+	"editor_color"	"0.0 0.5 0.8"
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+
+	// TODO: This is just a stub - add proper entity definition and explanation!
+}

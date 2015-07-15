@@ -460,6 +460,7 @@ entityDef func_mountedobject {
 	"editor_color"	"0 0.5 0.8"
 	
 	"editor_var bindJoint"	"model bone to use as view position"
+	"editor_var call"		"name of script function to call"
 	"editor_var def_projectile" "the kind of projectile to shoot"
 	"editor_float firerate"	"the rate of fire, I guess..."
 	"editor_int harc"		"restrict horizontal view by +/- this angle"

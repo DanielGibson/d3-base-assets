@@ -1,9 +1,11 @@
+TL;DR: all the assets provided here are under Public Domain/WTFPLv2.
+If you use them, credit would be appreciated, but is not necessary.
+
+Details:
+
 The following license applies to:
 
-    def/ammo.def
-    def/engine.def
-    def/funcs.def
-    def/player.def
+    def/*.def
     
     maps/test.map
     maps/test.cm
@@ -35,6 +37,7 @@ The following license applies to:
     textures/dummy_white.tga
 
     textures/common/aasobstacle.tga
+    textures/common/aasportal.tga
     textures/common/aassolid.tga
     textures/common/clipplus.tga
     textures/common/clip.tga
@@ -69,6 +72,11 @@ The following license applies to:
     textures/triggers/trigrelay.tga
     textures/triggers/trigtimer.tga
     textures/triggers/trigtouch.tga
+
+ Copyright (C) 2011-2015, contributors of this project and
+                          "doom3_minimal_assets.rar" from the iodoom3 wiki
+     
+ Licensed under WTFPLv2:
 
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
                     Version 2, December 2004

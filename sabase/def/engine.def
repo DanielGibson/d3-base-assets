@@ -1,39 +1,65 @@
+// recreated definitions of entities of Doom3, mostly from misc.def
+// (C) 2011-2015 contributors of d3-base-assets, licensed under WTFPL v2
+
 entityDef worldspawn {
-  "editor_color" "0 .5 .8"
-  "editor_mins"  "?"
-  "editor_maxs"  "?"
-  "no_stamina"   "1"
-  "spawnclass"   "idWorldspawn"
+	"spawnclass"   "idWorldspawn"
+
+	"editor_usage"	"TODO: Meaningful description, this is a stub!"
+
+	"editor_maxs"  "?"
+	"editor_mins"  "?"
+	"editor_color" "0 .5 .8"
+
+	"no_stamina"   "1"
+
+	// TODO: This is just a stub - add proper entity definition and explanation!
 }
 
 entityDef light {
-  "editor_color" "0 1 0"
-  "editor_mins"  "-8 -8 -8"
-  "editor_maxs"  "8 8 8"
-  "spawnclass"   "idLight"
-}
+	"spawnclass"   "idLight"
 
-entityDef info_player_start {
-  "editor_color"     "1 0 0"
-  "editor_mins"      "-16 -16 0"
-  "editor_maxs"      "16 16 64"
-  "editor_showangle" "1"
-  "spawnclass"       "idPlayerStart"
-}
+	"editor_usage"	"TODO: Meaningful description, this is a stub!"
 
-entityDef info_player_deathmatch {
-  "editor_color"     "1 0 0"
-  "editor_mins"      "-16 -16 0"
-  "editor_maxs"      "16 16 64"
-  "editor_showangle" "1"
-  "spawnclass"       "idPlayerStart"
+	"editor_color" "0 1 0"
+	"editor_mins"  "-8 -8 -8"
+	"editor_maxs"  "8 8 8"
+	
+	// TODO: This is just a stub - add proper entity definition and explanation!
 }
 
 entityDef player_doommarine {
-   "spawnclass"   "idPlayer"
-   "scriptobject" "player"
+	"spawnclass"   "idPlayer"
+	"scriptobject" "player"
+
+	// TODO: This is just a stub - add proper entity definition and explanation!
 }
 
 entityDef player_doommarine_mp {
-  "inherit" "player_doommarine"
+	"inherit" "player_doommarine"
+
+	// TODO: This is just a stub - add proper entity definition and explanation!
+}
+
+entityDef speaker {
+	"spawnclass"	"idSound"
+
+	"editor_usage"	"TODO: Meaningful description, this is a stub!"
+
+	"editor_color"	"0.0 0.5 0.8"
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+
+	// TODO: This is just a stub - add proper entity definition and explanation!
+}
+
+entityDef text {
+	"spawnclass"	"idTextEntity"
+
+	"editor_usage"	"TODO: Meaningful description, this is a stub!"
+
+	"editor_color"	"0.0 0.5 0.8"
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+
+	// TODO: This is just a stub - add proper entity definition and explanation!
 }
