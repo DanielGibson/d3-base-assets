@@ -72,6 +72,8 @@ The following license applies to:
     textures/triggers/trigrelay.tga
     textures/triggers/trigtimer.tga
     textures/triggers/trigtouch.tga
+    
+    texture-templates/*.*
 
  Copyright (C) 2011-2015, contributors of this project and
                           "doom3_minimal_assets.rar" from the iodoom3 wiki
