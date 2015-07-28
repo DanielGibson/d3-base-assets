@@ -58,16 +58,32 @@ entityDef light {
 	"break"	"0"
 }
 
-entityDef speaker {
-	"spawnclass"	"idSound"
-
-	"editor_usage"	"TODO: Meaningful description, this is a stub!"
-
-	"editor_color"	"0.0 0.5 0.8"
-	"editor_maxs"	"8 8 8"
-	"editor_mins"	"-8 -8 -8"
-
-	// TODO: This is just a stub - add proper entity definition and explanation!
+entityDef speaker {
+	"spawnclass"	"idSound"
+
+	"editor_usage"	"A speaker."
+
+	"editor_color"	"0.0 1.0 0.0"
+	"editor_material" "textures/common/speaker"
+	"editor_maxs"	"8 8 8"
+	"editor_mins"	"-8 -8 -8"
+
+
+	"editor_bool s_global"			"play globally (at full volume independent of listeners position)"
+	"editor_bool s_looping"			"play in endless loop"
+	"editor_float s_maxDistance"	"overwrite sound shader's maxDistance attribute"
+	"editor_float s_minDistance"	"overwrite sound shader's minDistance attribute"
+	// FIXME: s_occlusion sets a SSF_NO_OCCLUSION flag?!
+	"editor_bool s_occlusion"		"if set (to 1), sound doesn't flow through portals, but only reaches listeners over a straight unoccluded line"
+	"editor_bool s_omni"	        "sound is omnidirectional"
+	"editor_snd s_shader"			"sound to be played"
+	"editor_float s_shakes"			"if a sound is loud enough, it makes the screen shake. this value is multiplied to the sounds current gain/volume"
+	"editor_float s_volume"			"overwrite the volume defined in the sound shader"
+	"editor_bool s_waitfortrigger"	"don't start playing until triggered"
+	"editor_snd snd_demonic"		"sound shader for the demonic sound"
+	"editor_bool overlayDemonic"	"if set (to 1), sound is overlayed with snd_demonic, else it's replaced with snd_demonic"
+	"editor_float random"			"variance (in secs) of the random pauses (added/subtracted to wait)"
+	"editor_float wait"				"if > 0, time to wait before playing the sound (again)"
 }
 
 entityDef text {
