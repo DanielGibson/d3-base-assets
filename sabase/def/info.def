@@ -49,7 +49,6 @@ entityDef info_player_teleport {
 	"push"			"300"
 	"visualEffect"	"0"
 	"visualView"	""
-	// TODO: This is just a stub - add proper entity definition and explanation!
 }
 
 // from misc.def:
